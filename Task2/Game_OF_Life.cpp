@@ -8,19 +8,25 @@ Game_OF_Life::Game_OF_Life()
 }
 
 // set the board cells
-void Game_OF_Life::initialize()
+bool Game_OF_Life::initialize()
 {
     n_rows = 20;
     n_cols = 20;
+    board = new int*[n_rows];
     for (int i = 0; i < n_rows; i++)
     {
-        board[i] = new char[n_rows];
+        board[i] = new int[n_cols];
         for (int j = 0; j < n_cols; j++)
         {
-            board[i][j] = 0;
+            board[i][j] = rand() % 2; // get random value between 0 and 1
         }
     }
+
+    return true;
 }
+
+
+
 
 // sets all the cell to 0 as dead cells
 void Game_OF_Life::reset()
@@ -42,7 +48,7 @@ void Game_OF_Life::row_line()
     cout << '\n';
     for (int i = 0; i < n_cols; i++)
     {
-        cout << '-----';
+        cout << "----";
     }
     cout << '\n';
 }
@@ -54,7 +60,7 @@ void Game_OF_Life::display()
     for (int i = 0; i < n_rows; i++) {
         cout << ':';
         for (int j = 0; j < n_cols; j++) {
-            cout << ' ' <<board[i][j] << ':';
+            cout << ' ' <<board[i][j] << " :";
         }
         row_line();
     }
@@ -130,11 +136,27 @@ void Game_OF_Life::next_generation() {
 
 // ---- complete here --- //
 
-// // run the Game
+// run the Game for certain number of times
+void Game_OF_Life::run(int times) {
 
-// void Game_OF_Life::run() {
 
-// }
+
+    // if initialization for the board proccess happen correctly run the the game
+    if (initialize()) {
+        while(times) {
+
+            next_generation();
+            cout << "Next generation" << '\n';
+            display();
+            times--;
+        }
+    }
+
+
+}
+
+
+
 
 
 
