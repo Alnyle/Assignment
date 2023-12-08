@@ -1,3 +1,11 @@
+// File name: A3_SheetPb3_20220737.cpp
+// Purpose: Construct frequency table for words frequency inside a file
+// Author(s):  Ahmed Elniel Esmaiel Adam      
+// ID(s): 20220737
+// Section: S11
+// Date: 8/12/2023
+
+
 #include <iostream>
 #include <map>
 #include <cctype>
@@ -7,16 +15,16 @@
 
 using namespace std;
 
-
+// clean word from any  and non-alphanumeric punctuation  value or punctuation expect "-"
 string cleanWord(string &word) {
 
-    // the clean word;
+    // store in it the clean word;
     string nWord;
 
-    // loop on word characters and clean it from any punctuation and non-alphanumeric
+    // loop on word characters and clean it from any punctuation and non-alphanumeric 
     for (int i = 0; i < word.size(); i++) {
         
-        // check if the character not punctuation and if the character is punctuation check is '-' then add it
+        // check if the character not punctuation and if the character is punctuation check it is '-' then add it to new word
         if (isalpha(word[i]) || word[i] == '-')  {
 
             
@@ -80,9 +88,8 @@ int main() {
 
     getFrequencyTable(file, freTable);
     
-
     for (auto word:freTable) {
-        cout << "Word: " << word.first << " " << "Frequency: " << word.second << '\n'; 
+        cout << "\"" << word.first << "\""  << "----> "<< word.second << '\n'; 
     }
     
     

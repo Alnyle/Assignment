@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.c++": "cpp",
+        "cstdlib": "cpp",
+        "iostream": "cpp",
+        "*.tcc": "cpp",
+        "random": "cpp",
+        "algorithm": "cpp"
+    }
+}

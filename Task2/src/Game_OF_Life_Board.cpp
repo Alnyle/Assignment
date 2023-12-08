@@ -1,18 +1,32 @@
-#include "Game_OF_Life.h"
+// File name: A3_SheetPb6_20220737.cpp
+// Purpose: program simulate Game of life
+// Author(s):  Ahmed Elniel Esmaiel Adam      
+// ID(s): 20220737
+// Section: S11
+// Date: 3/12/2023
 
+#include<iostream>
+#include<random>
+#include"BoardGame_Classes.hpp"
 
-
-
-Game_OF_Life::Game_OF_Life()
-{
-}
-
-// set the board cells
-bool Game_OF_Life::initialize()
+Game_OF_Life_Board::Game_OF_Life_Board()
 {
     n_rows = 20;
     n_cols = 20;
     board = new int*[n_rows];
+    for (int i = 0; i < n_rows; i++)
+    {
+        board[i] = new int[n_cols];
+        for (int j = 0; j < n_cols; j++)
+        {
+            board[i][j] = 0; 
+        }
+    }
+}
+
+// set the board game
+bool Game_OF_Life_Board::initialize()
+{
     for (int i = 0; i < n_rows; i++)
     {
         board[i] = new int[n_cols];
@@ -29,7 +43,7 @@ bool Game_OF_Life::initialize()
 
 
 // sets all the cell to 0 as dead cells
-void Game_OF_Life::reset()
+bool Game_OF_Life_Board::reset()
 {
 
     for (int i = 0; i < n_cols; i++)
@@ -39,10 +53,11 @@ void Game_OF_Life::reset()
             board[i][j] = 0;
         }
     }
+    return true;
 }
 
 /// @brief print ---- for every square in the board
-void Game_OF_Life::row_line()
+void Game_OF_Life_Board::row_line()
 {
 
     cout << '\n';
@@ -54,7 +69,7 @@ void Game_OF_Life::row_line()
 }
 
 // display Game board
-void Game_OF_Life::display()
+void Game_OF_Life_Board::display()
 {
     row_line();
     for (int i = 0; i < n_rows; i++) {
@@ -69,7 +84,7 @@ void Game_OF_Life::display()
 
 
 // return the number of live neighbors of cell
-int Game_OF_Life::count_neighbors(int i, int j) {
+int Game_OF_Life_Board::count_neighbors(int i, int j) {
 
     int counter = 0;
 
@@ -88,7 +103,7 @@ int Game_OF_Life::count_neighbors(int i, int j) {
 }
 
 // set the new life and dead cell
-void Game_OF_Life::next_generation() {
+bool Game_OF_Life_Board::next_generation() {
 
     for (int i = 0; i < n_rows; i++) {
         for (int j = 0; j < n_cols; j++) {
@@ -131,28 +146,7 @@ void Game_OF_Life::next_generation() {
             }
         }
     }
-}
-
-
-// ---- complete here --- //
-
-// run the Game for certain number of times
-void Game_OF_Life::run(int times) {
-
-
-
-    // if initialization for the board proccess happen correctly run the the game
-    if (initialize()) {
-        while(times) {
-
-            next_generation();
-            cout << "Next generation" << '\n';
-            display();
-            times--;
-        }
-    }
-
-
+    return true;
 }
 
 
@@ -160,7 +154,9 @@ void Game_OF_Life::run(int times) {
 
 
 
-Game_OF_Life::~Game_OF_Life()
+
+
+Game_OF_Life_Board::~Game_OF_Life_Board()
 {
     for (int i = 0; i < n_rows; i++)
     {
