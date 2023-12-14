@@ -2,6 +2,9 @@
 // Author:  Mohammad El-Ramly
 // Date:    10/10/2022
 // Version: 1
+
+
+#include<bits/stdc++.h> 
 #ifndef _BoardGame_CLASSES_H
 #define _BoardGame_CLASSES_H
 using namespace std;
@@ -27,6 +30,11 @@ public:
    virtual void display_board() = 0;
    // Return true if game is over
    virtual bool game_is_over() = 0;
+   virtual int winnerPlayer() = 0;
+
+    //
+    virtual int miniMax(int depth, bool isMaximizing, bool firstTime) = 0;
+
 };
 
 ///////////////////////////////////////////
@@ -54,6 +62,9 @@ public:
    bool is_winner();
    bool is_draw();
    bool game_is_over();
+   int winnerPlayer();
+   int miniMax(int depth, bool isMaximizing, bool firstTime);
+
 };
 
 ///////////////////////////////////////////
@@ -80,6 +91,7 @@ class Player {
         char get_symbol();
 };
 
+
 ///////////////////////////////////////////
 // This class represents a random computer player
 // that generates random positions x y (0 to 2)
@@ -94,6 +106,19 @@ class RandomPlayer: public Player {
         void get_move(int& x, int& y);
 };
 
+
+class SmartPlayer: public Player {
+    protected:
+        int dimension;
+    public:
+        // Take a symbol and pass it to parent
+        SmartPlayer (char symbol, int dimension);
+        // Generate a random move
+        void get_move(int& x, int& y) {};
+        int miniMax(Tic_Tac_Toe_Board *theBoard, int depth, bool isMaximizing, bool firstTime);
+};
+
+
 ///////////////////////////////////////////
 class GameManager {
     private:
@@ -102,6 +127,9 @@ class GameManager {
     public:
         GameManager(Board*, Player* playerPtr[2]);
         void run();
+
+        // if user choice to play with computer -> it will run the game the smart player
+        void smartRun();
         // This method creates board and players
         // It displays board
         // While True

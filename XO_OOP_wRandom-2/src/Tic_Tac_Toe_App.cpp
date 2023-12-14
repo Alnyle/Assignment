@@ -1,5 +1,5 @@
 // Class definition for Tic_Tac_Toe_App
-// Author:  Ahmed El-niel
+// Author:  Ahmed Elniel Esmaiel Adam
 // Date:    2/12/2023
 // Version: 1
 
@@ -22,6 +22,8 @@ int main() {
     else if (choice == 1)
         //Player pointer points to child
         players[1] = new RandomPlayer ('o', 5);
+    else if (choice == 2) 
+        players[1] = new SmartPlayer('o', 5);
     // else 
 
 
